@@ -4,4 +4,4 @@ from .models import Students
 
 @admin.register(Students)
 class StudentAdmin(admin.ModelAdmin):
-    list_display=['id','name','enr','marks']
+    list_display=['id','profile','name','enr','status','color']

@@ -4,9 +4,20 @@ from .models import Students
 class Addstudents(forms.ModelForm):
     class Meta:
         model=Students
-        fields=("name","enr","marks")
+        fields=('profile',"name","enr",'color')
         widgets={
             'name':forms.TextInput(attrs={'class':'form-control'}),
             'enr':forms.NumberInput(attrs={'class':'form-control'}),
-            'marks':forms.NumberInput(attrs={'class':'form-control'})
+            # 'status':forms.CheckboxInput(),
+            'color':forms.TextInput(attrs={'class':'form-control'})
+        }
+class Editstudents(forms.ModelForm):
+    class Meta:
+        model=Students
+        fields=('profile',"name","enr","status",'color')
+        widgets={
+            'name':forms.TextInput(attrs={'class':'form-control'}),
+            'enr':forms.NumberInput(attrs={'class':'form-control'}),
+            'status':forms.CheckboxInput(),
+            'color':forms.TextInput(attrs={'class':'form-control'})
         }

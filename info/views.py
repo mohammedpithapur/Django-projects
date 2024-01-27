@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.views import View
 from .models import Students
-from .form import Addstudents
+from .form import Addstudents,Editstudents
 # Create your views here.
 
 class HOME(View):
@@ -13,7 +13,7 @@ class Add(View):
         addit= Addstudents()
         return render(request, 'main/add.html', {"add":addit})
     def post(self,request):
-        addit = Addstudents(request.POST)
+        addit = Addstudents(request.POST, request.FILES)
         print(addit)
         if addit.is_valid():
             addit.save()
@@ -31,11 +31,11 @@ class Delete(View):
 class Edit(View):
     def get(self,request, id):
         s=Students.objects.get(id=id)
-        fm=Addstudents(instance=s)
+        fm=Editstudents(instance=s)
         return render(request, 'main/edit.html',{'form':fm})
     def post(self, request, id):
         s=Students.objects.get(id=id)
-        fm=Addstudents(request.POST, instance=s)
+        fm=Editstudents(request.POST,request.FILES, instance=s)
         if fm.is_valid():
             fm.save()
             return redirect('/')
