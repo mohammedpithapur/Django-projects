@@ -1,6 +1,7 @@
 {% extends "main/base.html" %}
 {% block title %}Home{% endblock title %}
 {% block main_content %}
+<a href="{%url 'admin' %}" style="align-items: center; padding: auto; margin: 80;" class="btn btn-primary">Profeser login</a>
 <section class="container">
     <div class="row justify-content-around text-center mt-5">
     <div class="col-sm-8">
@@ -15,6 +16,7 @@
           <th scope="col">Profile pic</th>
           <th scope="col">Name</th>
           <th scope="col">Enrolment No</th>
+          <th scope="col">Task</th>
           <th scope="col">Status</th>
           <th scope="col">Action</th>
         </tr>
@@ -29,18 +31,23 @@
           {% endif %}
         </td>
           <td style="color: {{i.color}};">{{i.name}}</td>
+          
           <td>{{i.enr}}</td>
+          <td>{{i.task}}</td>
           {% if i.status %}
-          <td>Completed</td>
+          <td style="color: green;">Completed</td>
+          {% elif i.task = 'None' %}
+          <td style="color: red;">Not assind</td>
           {% else %}
-          <td>In-Progress</td>
+          <td style="color: red;">In-Progress</td>
           {% endif %}
-          <td>
-            <form action="{% url "delete" %}" method="POST">
+         
+            {% comment %} <form action="{% url "delete" %}" method="POST">
               {% csrf_token %}
               <input type="hidden" name="id" value="{{i.id}}">
               <input type="submit" value="Delete">
-            </form>
+            </form> {% endcomment %}
+            <td>
             <a href="{% url "edit" i.id %}" class="btn btn-info btn-sm">Edit</a>
           </td>
         </tr>
@@ -49,8 +56,8 @@
       </tbody>
   </table>
   <div class="row justify-center mt-1">
-    
-        <a href="{% url "Add" %}" class="btn btn-primary btn-sm" style="margin-bottom: 20;">Add</a>
+{% comment %}     
+        <a href="{% url "Add" %}" class="btn btn-primary btn-sm" style="margin-bottom: 20;">Add</a> {% endcomment %}
     
 </div>
 </section>
