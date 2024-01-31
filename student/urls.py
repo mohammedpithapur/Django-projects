@@ -5,5 +5,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('info.urls'))
+    path('', include('info.urls')),
+    path('members/', include('django.contrib.auth.urls')),
+    path('members/', include('proflogin.urls')),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
